@@ -2,6 +2,7 @@ export class ModelTodo {
   id: number;
   content: string;
   isDone: boolean;
-  createdate: Date;
-  updateddate: Date;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
 }

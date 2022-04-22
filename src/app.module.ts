@@ -5,6 +5,7 @@ import { EnvironmentConfigModule } from './infrastructure/config/environment-con
 import { TypeormConfigModule } from './infrastructure/config/typeorm/typeorm.module';
 import { LoggerModule } from './infrastructure/logger/logger.module';
 import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module';
+import { RepositoriesModule } from './infrastructure/repositories/repositories.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module'
     TypeormConfigModule,
     LoggerModule,
     ExceptionsModule,
+    RepositoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

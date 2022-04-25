@@ -1,4 +1,5 @@
 export interface DatabaseConfig {
+  getDatabaseType(): string;
   getDatabaseHost(): string;
   getDatabasePort(): number;
   getDatabaseUser(): string;

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ModelTodo } from 'src/domain/model/Todo';
+import { TodoModel } from 'src/domain/model/todo';
 import { ITodoRepository } from '../../domain/repositories/todoRepository.interface';
 import { Todo } from '../entities/todo.entity';
 
@@ -11,8 +11,8 @@ export class TodoRepository implements ITodoRepository {
     @InjectRepository(Todo) private readonly todoRepository: Repository<Todo>,
   ) {}
 
-  private toModelTodo(todoEntity: Todo): ModelTodo {
-    const todo: ModelTodo = new Todo();
+  private toModelTodo(todoEntity: Todo): TodoModel {
+    const todo: TodoModel = new Todo();
 
     todo.id = todoEntity.id;
     todo.content = todoEntity.content;
@@ -23,7 +23,7 @@ export class TodoRepository implements ITodoRepository {
     return todo;
   }
 
-  private toEntityTodo(todo: ModelTodo): Todo {
+  private toEntityTodo(todo: TodoModel): Todo {
     const todoEntity: Todo = new Todo();
 
     todoEntity.id = todo.id;
@@ -33,15 +33,15 @@ export class TodoRepository implements ITodoRepository {
     return todoEntity;
   }
 
-  async insert(todo: ModelTodo): Promise<void> {
+  async insert(todo: TodoModel): Promise<void> {
     const todoEntity = this.toEntityTodo(todo);
     await this.todoRepository.insert(todoEntity);
   }
-  async findAll(): Promise<ModelTodo[]> {
+  async findAll(): Promise<TodoModel[]> {
     const todosEntity = await this.todoRepository.find();
     return todosEntity.map((todoEntity) => this.toModelTodo(todoEntity));
   }
-  async findById(id: number): Promise<ModelTodo> {
+  async findById(id: number): Promise<TodoModel> {
     const todoEntity = await this.todoRepository
       .createQueryBuilder('todo')
       .where('todo.id = :id', { id })
